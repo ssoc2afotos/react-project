@@ -28,8 +28,7 @@ const CourseModalContent = ({ course, addChange }) => {
               marginLeft: "2rem",
             }}
           >
-            <h1>Info</h1>
-
+            <h1 style={{ marginBottom: "-0.2rem" }}>Info</h1>
             <Flex flexDirection={"column"}>
               <p>Title: </p>
               <Input
@@ -81,7 +80,7 @@ const CourseModalContent = ({ course, addChange }) => {
             flexDirection={"column"}
             style={{ width: "50%", marginRight: "2rem", gap: "0.4rem" }}
           >
-            <h1>Dates</h1>
+            <h1 style={{ marginBottom: "-0.2rem" }}>Dates</h1>
             <Flex flexDirection={"column"}>
               <p>Start date: </p>
               <DatePicker
@@ -131,10 +130,11 @@ const CourseModalContent = ({ course, addChange }) => {
                 }
               />
             </Flex>
-            <h1>Price</h1>
+            <h1 style={{ marginBottom: "-0.2rem" }}>Price</h1>
             <Flex flexDirection={"column"}>
               <p>Normal: </p>
               <Input
+                suffix="€"
                 defaultValue={course?.price?.normal ?? ""}
                 onChange={(e) => addChange("price", e.target.value, "normal")}
                 placeholder={"Normal price"}
@@ -143,6 +143,7 @@ const CourseModalContent = ({ course, addChange }) => {
             <Flex flexDirection={"column"}>
               <p>Early brid: </p>
               <Input
+                suffix="€"
                 defaultValue={course?.price?.early_bird ?? ""}
                 placeholder={"Early bird price"}
                 onChange={(e) =>
@@ -163,6 +164,7 @@ export const CourseModal = ({
   onCancel,
   course,
   addChange,
+  title,
 }) => {
   console.log("course: ", course);
   return (
@@ -174,7 +176,7 @@ export const CourseModal = ({
             color: "rgb(37, 150, 190)",
           }}
         >
-          Add new course
+          {title}
         </b>
       }
       open={visible}

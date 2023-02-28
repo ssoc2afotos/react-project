@@ -249,6 +249,7 @@ const CoursePage = () => {
                         onSave={onSave}
                         onCancel={cancelEditModal}
                         addChange={addChange}
+                        title={"Edit course"}
                         closable
                       />
                     )}

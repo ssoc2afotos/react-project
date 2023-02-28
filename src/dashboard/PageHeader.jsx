@@ -96,6 +96,7 @@ const PageHeader = ({ title, description, showButton, updateCourses }) => {
               onCancel={onCancel}
               onSave={onSave}
               addChange={addChange}
+              title={"Add new course"}
               closable
             />
           )}
