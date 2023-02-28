@@ -11,7 +11,7 @@ import { DeleteModal } from "./DeleteModal";
 import { CourseModal } from "./CourseModal";
 
 const CoursePage = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [course, setCourse] = useState({});
   const baseURL = useAuthStore((state) => state.baseURL);
   const [changePath, changeNavItems] = useOutletContext();
