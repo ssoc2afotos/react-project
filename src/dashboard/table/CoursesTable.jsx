@@ -50,7 +50,9 @@ const CoursesTable = ({ changePath, changeNavItems }) => {
     // <Card style={{ display: "flex", overflowY: "auto", borderRadius: "15px" }}>
     <div>
       {isLoading ? (
-        <Spin size="large" />
+        <>
+          <Spin size="large" />
+        </>
       ) : (
         <Flex
           flexDirection={"column"}

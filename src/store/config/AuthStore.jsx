@@ -1,6 +1,9 @@
 const config = (set) => ({
   baseURL: "http://localhost:3001",
 
+  path: "dashboard",
+  setPath: (newPath) => set(() => ({ path: newPath })),
+
   previousPath: "/",
   setPreviousPath: (newPreviousPath) =>
     set(() => ({ previousPath: newPreviousPath })),

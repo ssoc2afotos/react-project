@@ -5,9 +5,11 @@ import Footer from "./Footer";
 import { useState } from "react";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { HomeFilled } from "@ant-design/icons";
+import { useAuthStore } from "./store/useStores";
 
 const BasicLayout = () => {
-  const [path, setPath] = useState("dashboard");
+  const path = useAuthStore((state) => state.path);
+  const setPath = useAuthStore((state) => state.setPath);
   const [navItems, setNavItems] = useState([
     {
       label: "Dashboard",

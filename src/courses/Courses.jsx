@@ -83,7 +83,9 @@ const Courses = () => {
       >
         <Flex flexDirection={"row"} style={{ width: "100%", gap: "1rem" }}>
           {isLoading ? (
-            <Spin size="large" />
+            <>
+              <Spin size="large" />
+            </>
           ) : (
             <Row gutter={[40, 50]} justify="left" style={{ width: "100%" }}>
               {courses.map((course) => (
