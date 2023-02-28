@@ -9,11 +9,7 @@ const CoursesTableHead = ({ headers }) => {
       <TableRow key={"header-row"} width="5%">
         <TableCell key={"ghost-cell"} />
         {headers.map((item) => (
-          <TableCell
-            key={item.id}
-            align={item.name === "Online" ? "center" : "left"}
-            className="admin-header"
-          >
+          <TableCell key={item.id} align={item.align} className="admin-header">
             <p key={`${item} - text`}>{item.name}</p>
           </TableCell>
         ))}

@@ -26,10 +26,10 @@ const CoursesTable = ({ changePath, changeNavItems }) => {
         console.log("response.data: ", response.data);
         setData(response.data);
         setHeadData([
-          { id: 1, name: "Title" },
-          { id: 2, name: "Online" },
-          { id: 3, name: "Price" },
-          { id: 4, name: "Date" },
+          { id: 1, name: "Title", align: "left" },
+          { id: 2, name: "Online", align: "center" },
+          { id: 3, name: "Price", align: "left" },
+          { id: 4, name: "Date", align: "left" },
         ]);
         setNumberOfCourses(response.data.length);
       } catch (err) {
