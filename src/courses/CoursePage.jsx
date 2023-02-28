@@ -11,7 +11,7 @@ import { DeleteModal } from "./DeleteModal";
 import { CourseModal } from "./CourseModal";
 
 const CoursePage = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [course, setCourse] = useState({});
   const baseURL = useAuthStore((state) => state.baseURL);
   const [changePath, changeNavItems] = useOutletContext();
@@ -36,6 +36,7 @@ const CoursePage = () => {
       }
     };
 
+    setIsLoading(true);
     getCoursesData();
     setIsLoading(false);
   }, [coursesUpdated]);
@@ -108,203 +109,203 @@ const CoursePage = () => {
       }}
     >
       {isLoading ? (
-        <Spin size="large" />
+        <>
+          <Spin size="large" />
+        </>
       ) : (
-        Object.keys(course).length && (
+        <Flex
+          flexDirection={"column"}
+          style={{ marginBottom: "2rem", minHeight: "72vh" }}
+        >
+          <PageHeader
+            title={`${courseID}. ${course?.title}`}
+            description={null}
+          />
           <Flex
-            flexDirection={"column"}
-            style={{ marginBottom: "2rem", minHeight: "72vh" }}
+            flexDirection={"row"}
+            style={{ width: "95vw", marginTop: "3rem" }}
           >
-            <PageHeader
-              title={`${courseID}. ${course?.title}`}
-              description={null}
+            <Image
+              preview={false}
+              width={"20vw"}
+              height={"40vh"}
+              style={{ borderRadius: 10 }}
+              src={
+                course?.imagePath && course?.imagePath !== ""
+                  ? course.imagePath
+                  : "/courses/noImage.jpg"
+              }
             />
             <Flex
-              flexDirection={"row"}
-              style={{ width: "95vw", marginTop: "3rem" }}
+              flexDirection={"column"}
+              style={{
+                width: "70vw",
+                marginLeft: "3rem",
+                marginRight: "4rem",
+              }}
             >
-              <Image
-                preview={false}
-                width={"20vw"}
-                height={"40vh"}
-                style={{ borderRadius: 10 }}
-                src={
-                  course.imagePath && course.imagePath !== ""
-                    ? course.imagePath
-                    : "/courses/noImage.jpg"
-                }
-              />
+              <Flex
+                flexDirection={"row"}
+                style={{ width: "70vw", gap: "2rem", marginLeft: "2rem" }}
+              >
+                <Flex
+                  flexDirection={"row"}
+                  style={{
+                    width: "max-content",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <b style={{ marginRight: "0.5rem" }}>Price:</b>{" "}
+                  {course?.price?.normal} €{" "}
+                </Flex>
+                <Flex
+                  flexDirection={"row"}
+                  style={{
+                    width: "max-content",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <b style={{ marginRight: "0.5rem" }}>Online:</b>{" "}
+                  {course?.online ? (
+                    <CheckCircleFilled
+                      style={{ color: "green", marginLeft: "0.5rem" }}
+                    />
+                  ) : (
+                    <CloseCircleFilled
+                      style={{ color: "red", marginLeft: "0.5rem" }}
+                    />
+                  )}
+                </Flex>
+                <Flex
+                  flexDirection={"row"}
+                  style={{
+                    width: "max-content",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <b style={{ marginRight: "0.5rem" }}>Duration:</b>{" "}
+                  {course?.duration}
+                </Flex>
+                <Flex
+                  flexDirection={"row"}
+                  style={{
+                    width: "max-content",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <b style={{ marginRight: "0.5rem" }}>Dates:</b>{" "}
+                  {transformDate(course?.dates?.start_date)} -{" "}
+                  {transformDate(course?.dates?.end_date)}
+                </Flex>
+              </Flex>
+              <Flex
+                flexDirection={"row"}
+                style={{
+                  width: "95%",
+                  marginLeft: "2rem",
+                  marginRight: "4rem",
+                  marginTop: "3rem",
+                  textAlign: "justify",
+                }}
+              >
+                {course?.description}
+              </Flex>
               <Flex
                 flexDirection={"column"}
                 style={{
-                  width: "70vw",
-                  marginLeft: "3rem",
+                  width: "80%",
+                  marginLeft: "2rem",
                   marginRight: "4rem",
+                  marginTop: "3rem",
+                  justifyContent: "center",
+                  gap: "2rem",
                 }}
               >
                 <Flex
                   flexDirection={"row"}
-                  style={{ width: "70vw", gap: "2rem", marginLeft: "2rem" }}
+                  style={{
+                    width: "100%",
+                    marginLeft: "2rem",
+                    marginRight: "4rem",
+                    justifyContent: "center",
+                    gap: "1rem",
+                  }}
                 >
-                  <Flex
-                    flexDirection={"row"}
+                  <Button
                     style={{
-                      width: "max-content",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      backgroundColor: "rgb(37, 150, 190)",
+                      color: "white",
                     }}
+                    onClick={() => setEditModalVisible(true)}
                   >
-                    <b style={{ marginRight: "0.5rem" }}>Price:</b>{" "}
-                    {course?.price?.normal} €{" "}
-                  </Flex>
-                  <Flex
-                    flexDirection={"row"}
+                    Edit
+                  </Button>
+                  {editModalVisible && (
+                    <CourseModal
+                      visible={editModalVisible}
+                      course={course}
+                      onSave={onSave}
+                      onCancel={cancelEditModal}
+                      addChange={addChange}
+                      title={"Edit course"}
+                      closable
+                    />
+                  )}
+                  <Button
                     style={{
-                      width: "max-content",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      backgroundColor: "red",
+                      color: "white",
                     }}
+                    onClick={() => setDeleteModalVisible(true)}
                   >
-                    <b style={{ marginRight: "0.5rem" }}>Online:</b>{" "}
-                    {course?.online ? (
-                      <CheckCircleFilled
-                        style={{ color: "green", marginLeft: "0.5rem" }}
-                      />
-                    ) : (
-                      <CloseCircleFilled
-                        style={{ color: "red", marginLeft: "0.5rem" }}
-                      />
-                    )}
-                  </Flex>
-                  <Flex
-                    flexDirection={"row"}
-                    style={{
-                      width: "max-content",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <b style={{ marginRight: "0.5rem" }}>Duration:</b>{" "}
-                    {course?.duration}
-                  </Flex>
-                  <Flex
-                    flexDirection={"row"}
-                    style={{
-                      width: "max-content",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <b style={{ marginRight: "0.5rem" }}>Dates:</b>{" "}
-                    {transformDate(course?.dates?.start_date)} -{" "}
-                    {transformDate(course?.dates?.end_date)}
-                  </Flex>
+                    Delete
+                  </Button>
+                  {deleteModalVisible && (
+                    <DeleteModal
+                      visible={deleteModalVisible}
+                      title={course?.title}
+                      onDelete={onDelete}
+                      onCancel={cancelDeleteModal}
+                      closable
+                    />
+                  )}
                 </Flex>
                 <Flex
                   flexDirection={"row"}
                   style={{
-                    width: "95%",
+                    width: "100%",
                     marginLeft: "2rem",
+                    marginTop: "5rem",
                     marginRight: "4rem",
-                    marginTop: "3rem",
-                    textAlign: "justify",
-                  }}
-                >
-                  {course?.description}
-                </Flex>
-                <Flex
-                  flexDirection={"column"}
-                  style={{
-                    width: "80%",
-                    marginLeft: "2rem",
-                    marginRight: "4rem",
-                    marginTop: "3rem",
                     justifyContent: "center",
-                    gap: "2rem",
+                    gap: "1rem",
                   }}
                 >
-                  <Flex
-                    flexDirection={"row"}
+                  <Button
                     style={{
-                      width: "100%",
-                      marginLeft: "2rem",
-                      marginRight: "4rem",
-                      justifyContent: "center",
-                      gap: "1rem",
+                      width: "max-content",
+                      backgroundColor: "#154c79",
+                      color: "white",
+                    }}
+                    onClick={() => {
+                      changeNavItems({
+                        label: course?.title,
+                        key: `courses/${course.id}`,
+                      });
+                      changePath(previousPath);
                     }}
                   >
-                    <Button
-                      style={{
-                        backgroundColor: "rgb(37, 150, 190)",
-                        color: "white",
-                      }}
-                      onClick={() => setEditModalVisible(true)}
-                    >
-                      Edit
-                    </Button>
-                    {editModalVisible && (
-                      <CourseModal
-                        visible={editModalVisible}
-                        course={course}
-                        onSave={onSave}
-                        onCancel={cancelEditModal}
-                        addChange={addChange}
-                        title={"Edit course"}
-                        closable
-                      />
-                    )}
-                    <Button
-                      style={{
-                        backgroundColor: "red",
-                        color: "white",
-                      }}
-                      onClick={() => setDeleteModalVisible(true)}
-                    >
-                      Delete
-                    </Button>
-                    {deleteModalVisible && (
-                      <DeleteModal
-                        visible={deleteModalVisible}
-                        title={course?.title}
-                        onDelete={onDelete}
-                        onCancel={cancelDeleteModal}
-                        closable
-                      />
-                    )}
-                  </Flex>
-                  <Flex
-                    flexDirection={"row"}
-                    style={{
-                      width: "100%",
-                      marginLeft: "2rem",
-                      marginTop: "5rem",
-                      marginRight: "4rem",
-                      justifyContent: "center",
-                      gap: "1rem",
-                    }}
-                  >
-                    <Button
-                      style={{
-                        width: "max-content",
-                        backgroundColor: "#154c79",
-                        color: "white",
-                      }}
-                      onClick={() => {
-                        changeNavItems({
-                          label: course?.title,
-                          key: `courses/${course.id}`,
-                        });
-                        changePath(previousPath);
-                      }}
-                    >
-                      Back to previous page
-                    </Button>
-                  </Flex>
+                    Back to previous page
+                  </Button>
                 </Flex>
               </Flex>
             </Flex>
           </Flex>
-        )
+        </Flex>
       )}
     </Card>
   );
