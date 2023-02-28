@@ -57,7 +57,7 @@ const CourseModalContent = ({ course, addChange }) => {
 
             <Flex flexDirection={"column"} style={{ marginTop: "1rem" }}>
               <Checkbox
-                defaultValue={course?.online ?? false}
+                defaultChecked={course?.online ?? false}
                 onChange={(checkedValue) =>
                   addChange("online", checkedValue.target.checked)
                 }
