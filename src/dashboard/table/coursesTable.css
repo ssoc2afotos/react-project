@@ -1,0 +1,45 @@
+.background {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 0.6rem;
+}
+.admin-header p {
+  font-weight: 700;
+  color: rgb(8, 8, 46);
+  margin-bottom: -0.3rem;
+}
+
+.modal-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.modal-text p {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 1.7rem;
+  font-weight: 600;
+}
+
+.modal-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.elements {
+  padding-top: 0.8rem;
+  margin-left: 1rem;
+  font-weight: 600;
+  font-size: 16px;
+  color: rgb(8, 8, 46);
+}
