@@ -86,7 +86,7 @@ const PageHeader = ({ title, description, showButton, updateCourses }) => {
             onClick={() => setNewCourseModalVisible(true)}
             style={{ border: "none", color: "rgb(37, 150, 190)" }}
           >
-            + Add new Course
+            + Add new course
           </Button>
           {newCourseModalVisible && (
             <CourseModal
