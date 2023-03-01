@@ -35,7 +35,7 @@ const PageHeader = ({ title, description, showButton, updateCourses }) => {
   const onSave = async () => {
     const url = `${baseURL}/courses`;
     const id =
-      numberOfCourses >= 10
+      numberOfCourses >= 9
         ? (numberOfCourses + 1).toString()
         : "0" + (numberOfCourses + 1).toString();
 
