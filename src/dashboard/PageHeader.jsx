@@ -39,7 +39,6 @@ const PageHeader = ({ title, description, showButton, updateCourses }) => {
         ? (numberOfCourses + 1).toString()
         : "0" + (numberOfCourses + 1).toString();
 
-    console.log("id: ", id);
     try {
       const response = await axios.post(url, {
         ...changes,

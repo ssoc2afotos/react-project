@@ -136,7 +136,9 @@ const CourseModalContent = ({ course, addChange }) => {
               <Input
                 suffix="€"
                 defaultValue={course?.price?.normal ?? ""}
-                onChange={(e) => addChange("price", e.target.value, "normal")}
+                onChange={(e) =>
+                  addChange("price", Number(e.target.value), "normal")
+                }
                 placeholder={"Normal price"}
               />
             </Flex>
@@ -147,7 +149,7 @@ const CourseModalContent = ({ course, addChange }) => {
                 defaultValue={course?.price?.early_bird ?? ""}
                 placeholder={"Early bird price"}
                 onChange={(e) =>
-                  addChange("price", e.target.value, "early_bird")
+                  addChange("price", Number(e.target.value), "early_bird")
                 }
               />
             </Flex>
