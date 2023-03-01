@@ -107,7 +107,9 @@ const Courses = () => {
                     bodyStyle={{ overflowX: "hidden" }}
                   >
                     <Flex style={{ marginBottom: "0.8rem" }}>
-                      <b>{course.title}</b>
+                      <b>
+                        {course.id}. {course.title}
+                      </b>
                     </Flex>
                     <Image
                       preview={false}
