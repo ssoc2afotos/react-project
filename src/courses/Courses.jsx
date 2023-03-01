@@ -19,6 +19,7 @@ const Courses = () => {
   const [courses, setCourses] = useState([]);
   const baseURL = useAuthStore((state) => state.baseURL);
   const setPreviousPath = useAuthStore((state) => state.setPreviousPath);
+  const setNumberOfCourses = useAuthStore((state) => state.setNumberOfCourses);
   const [changePath, changeNavItems] = useOutletContext();
 
   const updateCourses = () => {
@@ -32,6 +33,7 @@ const Courses = () => {
         const response = await axios.get(url);
         console.log("response.data: ", response.data);
         setCourses(response.data);
+        setNumberOfCourses(response.data.length);
       } catch (err) {
         console.log("error: ", err);
         message.error(err, [3]);
